@@ -241,6 +241,7 @@
 			// Lightbox.
 				$('.gallery.lightbox')
 					.on('click', 'a', function(event) {
+						console.log('Hello!');
 
 						var $a = $(this),
 							$gallery = $a.parents('.gallery'),
