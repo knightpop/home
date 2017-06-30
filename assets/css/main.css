@@ -23,6 +23,22 @@ p.career-log {
 	width: 40px;
 }
 
+.detail-modal {
+	display: none;
+}
+
+.detail-modal.visible {
+	display: inherit;
+}
+
+#scrollUp {
+	bottom: 20px;
+	right: 20px;
+	width: 38px;
+	height: 38px;
+	background: url(../../images/top.png) no-repeat;
+}
+
 /* Reset */
 
 	html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
@@ -6986,12 +7002,19 @@ p.career-log {
 			opacity: 0;
 		}
 
-			.gallery.lightbox .modal .inner img {
-				display: block;
-				max-width: 90vw;
-				max-height: 85vh;
-				box-shadow: 0 1rem 3rem 0 rgba(0, 0, 0, 0.35);
-			}
+		.gallery.lightbox .modal .inner img {
+			display: block;
+			max-width: 90vw;
+			max-height: 85vh;
+			box-shadow: 0 1rem 3rem 0 rgba(0, 0, 0, 0.35);
+		}
+
+		.gallery.lightbox .modal .inner .detail-modal {
+			display: block;
+			max-width: 90vw;
+			max-height: 85vh;
+			box-shadow: 0 1rem 3rem 0 rgba(0, 0, 0, 0.35);
+		}
 
 		.gallery.lightbox .modal.visible {
 			-moz-pointer-events: auto;
