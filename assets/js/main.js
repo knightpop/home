@@ -17,6 +17,12 @@
 
 	$(function() {
 
+        $.scrollUp({
+            animation: 'fade',
+            scrollImg: {active: true, type: 'background', src: 'images/top.png'}
+        });
+
+
 		var	$window = $(window),
 			$body = $('body'),
 			$wrapper = $('#wrapper');
@@ -25,6 +31,8 @@
 			$body.addClass('is-loading');
 
 			$window.on('load', function() {
+				$('#portfolio')
+					.append('<iframe class="image" src="https://docs.google.com/presentation/d/1fZ-E2xLOZmqzMFOaBbFNP17WonR-_Uqg8_EuN4zxxgM/embed?start=false&loop=false&delayms=3000" frameborder="0" width="480" height="389" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>');
 				window.setTimeout(function() {
 					$body.removeClass('is-loading');
 				}, 100);
@@ -240,89 +248,94 @@
 
 			// Lightbox.
 				$('.gallery.lightbox')
-					.on('click', 'a', function(event) {
-
-						var $a = $(this),
-							$gallery = $a.parents('.gallery'),
-							$modal = $gallery.children('.modal'),
-							$modalImg = $modal.find('img'),
-							href = $a.attr('href');
-
-						// Not an image? Bail.
-							if (!href.match(/\.(jpg|gif|png|mp4)$/))
-								return;
-
-						// Prevent default.
-							event.preventDefault();
-							event.stopPropagation();
-
-						// Locked? Bail.
-							if ($modal[0]._locked)
-								return;
-
-						// Lock.
-							$modal[0]._locked = true;
-
-						// Set src.
-							$modalImg.attr('src', href);
-
-						// Set visible.
-							$modal.addClass('visible');
-
-						// Focus.
-							$modal.focus();
-
-						// Delay.
-							setTimeout(function() {
-
-								// Unlock.
-									$modal[0]._locked = false;
-
-							}, 600);
-
-					})
-					.on('click', '.modal', function(event) {
-
-						var $modal = $(this),
-							$modalImg = $modal.find('img');
-
-						// Locked? Bail.
-							if ($modal[0]._locked)
-								return;
-
-						// Already hidden? Bail.
-							if (!$modal.hasClass('visible'))
-								return;
-
-						// Lock.
-							$modal[0]._locked = true;
-
-						// Clear visible, loaded.
-							$modal
-								.removeClass('loaded')
-
-						// Delay.
-							setTimeout(function() {
-
-								$modal
-									.removeClass('visible')
-
-								setTimeout(function() {
-
-									// Clear src.
-										$modalImg.attr('src', '');
-
-									// Unlock.
-										$modal[0]._locked = false;
-
-									// Focus.
-										$body.focus();
-
-								}, 475);
-
-							}, 125);
-
-					})
+					// .on('click', 'a', function(event) {
+					// 	function makeDetailModal($innerDivElement, htmlElementToAppend) {
+                     //        $innerDivElement.append(htmlElementToAppend)
+                     //    }
+					//
+					// 	console.log('Hello!');
+                    //
+					// 	var $a = $(this),
+					// 		$gallery = $a.parents('.gallery'),
+					// 		$modal = $gallery.children('.modal'),
+					// 		$modalImg = $modal.find('img'),
+					// 		href = $a.attr('href');
+                    //
+					// 	// Not an image? Bail.
+					// 		if (!href.match(/\.(jpg|gif|png|mp4)$/))
+					// 			return;
+                    //
+					// 	// Prevent default.
+					// 		event.preventDefault();
+					// 		event.stopPropagation();
+                    //
+					// 	// Locked? Bail.
+					// 		if ($modal[0]._locked)
+					// 			return;
+                    //
+					// 	// Lock.
+					// 		$modal[0]._locked = true;
+                    //
+					// 	// Set src.
+					// 	$modalImg.attr('src', href);
+                    //
+					// 	// Set visible.
+					// 		$modal.addClass('visible');
+                    //
+					// 	// Focus.
+					// 		$modal.focus();
+                    //
+					// 	// Delay.
+					// 		setTimeout(function() {
+                    //
+					// 			// Unlock.
+					// 				$modal[0]._locked = false;
+                    //
+					// 		}, 600);
+                    //
+					// })
+					// .on('click', '.modal', function(event) {
+                    //
+					// 	var $modal = $(this),
+					// 		$modalImg = $modal.find('img');
+                    //
+					// 	// Locked? Bail.
+					// 		if ($modal[0]._locked)
+					// 			return;
+                    //
+					// 	// Already hidden? Bail.
+					// 		if (!$modal.hasClass('visible'))
+					// 			return;
+                    //
+					// 	// Lock.
+					// 		$modal[0]._locked = true;
+                    //
+					// 	// Clear visible, loaded.
+					// 		$modal
+					// 			.removeClass('loaded')
+                    //
+					// 	// Delay.
+					// 		setTimeout(function() {
+                    //
+					// 			$modal
+					// 				.removeClass('visible')
+                    //
+					// 			setTimeout(function() {
+                    //
+					// 				// Clear src.
+					// 					$modalImg.attr('src', '');
+                    //
+					// 				// Unlock.
+					// 					$modal[0]._locked = false;
+                    //
+					// 				// Focus.
+					// 					$body.focus();
+                    //
+					// 			}, 475);
+                    //
+					// 		}, 125);
+                    //
+					// })
 					.on('keypress', '.modal', function(event) {
 
 						var $modal = $(this);
@@ -332,25 +345,25 @@
 								$modal.trigger('click');
 
 					})
-					.prepend('<div class="modal" tabIndex="-1"><div class="inner"><img src="" /></div></div>')
-						.find('img')
-							.on('load', function(event) {
+					.prepend('<div class="modal" tabIndex="-1"><div class="inner" id="modal-inner"><img src="" /></div></div>')
+					.find('img')
+						.on('load', function(event) {
 
-								var $modalImg = $(this),
-									$modal = $modalImg.parents('.modal');
+							var $modalImg = $(this),
+								$modal = $modalImg.parents('.modal');
 
-								setTimeout(function() {
+							setTimeout(function() {
 
-									// No longer visible? Bail.
-										if (!$modal.hasClass('visible'))
-											return;
+								// No longer visible? Bail.
+									if (!$modal.hasClass('visible'))
+										return;
 
-									// Set loaded.
-										$modal.addClass('loaded');
+								// Set loaded.
+									$modal.addClass('loaded');
 
-								}, 275);
+							}, 275);
 
-							});
+						});
 
 	});
 
