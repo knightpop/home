@@ -15,12 +15,24 @@ p.career-log {
 	margin-bottom: 15px;
 }
 
+.portfolio-slide-mobile {
+	height: 100vw;
+}
+
 .gallery.style2 article .caption .caption-icon {
 	margin-bottom: 0;
 }
 
 .img-icon {
 	width: 40px;
+}
+
+a.link-cert {
+	text-decoration: none;
+}
+
+.img-cert {
+	width: 100%;
 }
 
 .detail-modal {
