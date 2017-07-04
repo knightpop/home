@@ -47,12 +47,24 @@
                     }
                 }
 
+                function isKorean() {
+                    var userLang = navigator.language || navigator.userLanguage;
+                    if(userLang.includes('ko')) return true;
+                    else false;
+                }
+
                 var className = 'image';
                 if(isMobile())
                 	className += ' portfolio-slide-mobile';
 
+                var pdfFile = '';
+                if(isKorean())
+                    pdfFile = 'Portfolio_Online_KOR.pdf';
+                else
+                    pdfFile = 'Portfolio_Online_ENG.pdf';
+
 				$('#portfolio')
-					.append('<iframe class="' + className + '" src="ViewerJS/#../assets/pdf/Portfolio_Online_ENG.pdf"></iframe>');
+					.append('<iframe class="' + className + '" src="../ViewerJS/#../assets/pdf/' + pdfFile + '"></iframe>');
 				window.setTimeout(function() {
 					$body.removeClass('is-loading');
 				}, 100);
