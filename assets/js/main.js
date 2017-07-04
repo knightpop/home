@@ -31,8 +31,28 @@
 			$body.addClass('is-loading');
 
 			$window.on('load', function() {
+                function isMobile() {
+                    if( navigator.userAgent.match(/Android/i)
+                        || navigator.userAgent.match(/webOS/i)
+                        || navigator.userAgent.match(/iPhone/i)
+                        || navigator.userAgent.match(/iPad/i)
+                        || navigator.userAgent.match(/iPod/i)
+                        || navigator.userAgent.match(/BlackBerry/i)
+                        || navigator.userAgent.match(/Windows Phone/i)
+                    ){
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+                }
+
+                var className = 'image';
+                if(isMobile())
+                	className += ' portfolio-slide-mobile';
+
 				$('#portfolio')
-					.append('<iframe class="image" src="https://docs.google.com/presentation/d/1fZ-E2xLOZmqzMFOaBbFNP17WonR-_Uqg8_EuN4zxxgM/embed?start=false&loop=false&delayms=3000" frameborder="0" width="480" height="389" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>');
+					.append('<iframe class="' + className + '" src="ViewerJS/#../assets/pdf/Portfolio_Online_ENG.pdf"></iframe>');
 				window.setTimeout(function() {
 					$body.removeClass('is-loading');
 				}, 100);
