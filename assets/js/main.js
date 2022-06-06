@@ -63,8 +63,6 @@
                 else
                     pdfFile = 'Portfolio_Online_ENG.pdf';
 
-				$('#portfolio')
-					.append('<iframe class="' + className + '" src="../ViewerJS/#../assets/pdf/' + pdfFile + '"></iframe>');
 				window.setTimeout(function() {
 					$body.removeClass('is-loading');
 				}, 100);
